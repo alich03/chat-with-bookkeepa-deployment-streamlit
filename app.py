@@ -11,8 +11,8 @@ from dotenv import load_dotenv
 load_dotenv()
 from time import sleep
 
-os.environ['PINECONE_API_KEY'] = os.getenv("PINECONE_API_KEY")
-os.environ['openai_api_key'] = os.getenv("OPEN_AI_KEY")
+# os.environ['PINECONE_API_KEY'] = os.getenv("PINECONE_API_KEY")
+# os.environ['openai_api_key'] = os.getenv("OPEN_AI_KEY")
 
 
 def chatbot_rag():
@@ -95,12 +95,14 @@ def get_response_from_api(user_input):
     temperature=0.4,
     max_tokens=4096  # Adjust token limit as per the model
         )
-    embed_model = OpenAIEmbeddings()
+    embed_model = OpenAIEmbeddings(api_key=os.getenv("OPEN_AI_KEY"))
 
     index_name = "rag-bookepa" 
 
-    vector_store = PineconeVectorStore.from_existing_index(index_name=index_name,embedding=embed_model)
-    retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 10})
+    pcv= PineconeVectorStore(index_name=index_name,embedding=embed_model,pinecone_api_key=os.getenv("PINECONE_API_KEY"))
+
+    # vector_store = PineconeVectorStore.from_existing_index(index_name=index_name,embedding=embed_model)
+    retriever = pcv.as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
     retrieval_qa_chat_prompt = PromptTemplate(
     input_variables=["context", "input"],
