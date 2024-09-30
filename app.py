@@ -97,7 +97,7 @@ def get_response_from_api(user_input):
         )
     embed_model = OpenAIEmbeddings(api_key=os.getenv("OPEN_AI_KEY"))
 
-    index_name = "rag-bookepa" 
+    index_name = "rag1" 
 
     pcv= PineconeVectorStore(index_name=index_name,embedding=embed_model,pinecone_api_key=os.getenv("PINECONE_API_KEY"))
 
