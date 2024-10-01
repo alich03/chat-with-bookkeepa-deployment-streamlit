@@ -109,8 +109,8 @@ def get_response_from_api(user_input):
 
     # vector_store = PineconeVectorStore.from_existing_index(index_name=index_name,embedding=embed_model)
     # retriever = pcv.as_retriever(search_type="similarity", search_kwargs={"k": 5})
-    
-    retriever = pcv.as_retriever(search_type="similarity", search_kwargs={"k": 4})
+
+    retriever = pcv.as_retriever(search_type="similarity", search_kwargs={"k": 7})
 
     retrieval_qa_chat_prompt = PromptTemplate(
     input_variables=["context", "input"],
