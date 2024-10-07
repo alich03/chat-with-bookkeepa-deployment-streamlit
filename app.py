@@ -131,8 +131,6 @@ def get_response_from_api(user_input):
 
             ''')
 
-
-
     combine_docs_chain = create_stuff_documents_chain(llm, retrieval_qa_chat_prompt)
     retrieval_chain = create_retrieval_chain(retriever, combine_docs_chain)
         # response = retrieval_chain.invoke({"input": "how to Transferring funds? "})
